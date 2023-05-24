@@ -1,113 +1,167 @@
 
 # Phase 3 Project - Choosing a Dataset
 
-You have the option to either choose a dataset from a curated list or propose your own dataset not on the list. The goal is to choose a dataset appropriate to the type of business problem and/or classification methods that most interests you. **It is up to you to define a stakeholder and business problem appropriate to the dataset you choose.**
+Dennis Mwanzia
+Phase 3 Project
+Classification of Water Wells in Tanzania
 
-If you choose a dataset from the curated list, inform your instructor which dataset you chose and jump right into the project. If you would like to propose your own dataset, run the dataset and business problem by your instructor for approval before starting your project.
 
-## Your Get Hired 'Game Plan'
+# Table of Contents
+1.	Introduction
+2.	Aim
+3.	Objectives
+4.	Data Source
+5.	Client
+6.	Import Libraries, Modules & Functions
+7.	Obtain Data/Load Data
+8.	Merging the Data Frames
+9.	Data Cleaning
+10.	Column description and Understanding
+11.	Data Understanding
+12.	Checking for null values
+13.	Inspecting and dealing with columns with Missing data
+14.	Dealing with columns that have similar data
+15.	The Target Column Inspection
+16.	Describing the numerical columns
+17.	Checking Other Irrelevant Columns & Initial Feature Engineering
+18.	Visualization of Target vs Selected Features
+19.	Visualizations using GeoPandas
+20.	Importing Tanzania Geographical data
+21.	Mapping Waterpoints by Function
+22.	Well Functionality by Management
+23.	Mapping the status of wells by Level of water quantity
+24.	Waterpoint functional status by Basin
+25.	Mapping Waterpoint Type Map
+26.	Mapping Well sources
+27.	Waterpoint Payment Type Mapping
+28.	Visualization Other Categorical columns
+29.	Modelling
+a)	Initial Model/Dummy Model
+b)	Decision Tree Classifier
+c)	Logistic Regression Model
+d)	Light Gradient Boosting Machine (LGBM)
+e)	XGBClassifier
+f)	Random Forest
+g)	Random Forest with SMOTE
 
-Help set yourself up for success by being strategic about your project/dataset choices.
+30.	Interpretations
+	Conclusion
+	Recommendation
 
-**Already know what your job search focus will be?** Consider choosing a dataset that relates to the companies/industries you are interested in and the types of business problems/data they navigate day to day. Doing so demonstrates your subject matter knowledge in their area, significantly elevating your relevance and value as a candidate -- we've seen this strategy WOW companies time and time again!
+## Introduction
+Tanzania, is an african developing country that is struggling with providing clean water to its population of over 63 million people as at 2021. There are many waterpoints already established in the country, but some are in need of repair while others have failed altogether. The main aim of this project is to build a model classifier that can predict the condition of water well using information about the type of pump, when it was installed, when the water well was constructed, how it is operated etc.
+Understanding which waterpoints will fail can help to improve maintenance operations and ensure that clean, potable water is available to communities across Tanzania.
 
-**Still exploring what type of role you would like to get once you graduate?** That's okay! Try to focus on a topic or problem that you are interested in and passionate about. Doing so will help you produce a better project overall that you enjoy creating and that you can speak about confidently and naturally.
 
-Coming out of Flatiron School your projects will be listed on your resume and will showcase your specific subject matter knowledge and interest/passions once you're job seeking. Help yourself put your best foot forward and make the strongest first impression possible.
+## Aim
+The goal of this project is to develop a model that predicts the functionality of water points which authorities in Tanzania can use to understand which water points are functional, nonfunctional, and functional but it needs to be repaired. The model will help the government of Tanzania to find the maintainance needs of wells while also being able to predict future well needs. The government will be able to prioritize the distribution of resources to optimize availability of water to communities throughout the country.
 
-Here are two grads who successfully did just this...
 
-> This student was interested in working with government and public sector data, and focused specifically on traffic data and safety. They utilized the Chicago Car Crashes dataset in [one project](https://github.com/jmarkowi/Chicago-Crashes)&#42; then later created a bike lane image dataset from multiple sources for their [capstone project](https://github.com/jmarkowi/NYC_bike_lanes)&#42;. Based on their combination of technical skills and subject-matter expertise, this student landed a government consulting role at ***ASR Analytics*** where they work to prevent identity theft in tax fraud.
 
-> This student ([GitHub link here](https://github.com/kbaranko/NYC-Building-Energy-Intensity/blob/master/README.md)&#42;) focused on working in the clean energy sector, and created their project *NYC Building Energy Density* using data from the 2016 Energy and Water Data Disclosure for New York City Local Law 84. The student landed a role at ***Kevala***, a clean energy software company, in under two months of job seeking.
+## Objectives
+1. Develop a classifier to classify the status of water wells in Tanzania
+2. Develop recommendations based on the status of the functional water wells in Tanzania.
 
-&#42;*Keep in mind that the Flatiron School Data Science program has changed over time, so these projects may or may not reflect the current project requirements. They are intended as inspiration for your dataset/project choice.*
 
-## Curated List of Datasets
+## Data
+The original data was obtained from the DrivenData 'Pump it Up: Data Mining the Water Table' competition which is data aggregrated from Taarifa waterpoints dashboard which aggregrates data from the Tanzania Ministry of Water. Taarifa is an open source platform for the crowd sourced reporting and triaging of infrastructure related issues. There were four different datasets namely;
+1. submission format
+2. training set
+3. test set 
+4. train labels set which contains status of wells. 
+## Data Cleaning & Dropping Features
 
-You may select any of the datasets below - we provide brief descriptions of each. Follow the links to learn more about the dataset and business problems before making a final decision.
 
-**If you are feeling overwhelmed or behind, we recommend you choose dataset #1.**
+## Initial Model/Dummy Model
 
-### 1) [SyriaTel Customer Churn](https://www.kaggle.com/becksddf/churn-in-telecoms-dataset)
+The confusion matrix and classification report for the Dummy Model indicate that the model is not predicting any positive instances (classes 1 and 2). This suggests that the model is not learning from the data and is predicting the majority class (class 0) for all instances.
 
-Build a classifier to predict whether a customer will ("soon") stop doing business with SyriaTel, a telecommunications company. This is a **binary** classification problem.
+The confusion matrix shows that the model predicts all instances as class 0, resulting in true positives (25802) for class 0 and no predictions for classes 1 and 2. The recall for class 0 is 1.00, which means that the model correctly identifies all instances of class 0. However, the recall for classes 1 and 2 is 0.00, indicating that the model fails to identify any instances of these classes.
 
-Most naturally, your audience here would be the telecom business itself, interested in reducing how much money is lost because of customers who don't stick around very long. The question you can ask is: are there any predictable patterns here?
+The classification report further confirms these observations. The precision, recall, and F1-score for classes 1 and 2 are all 0.00, indicating that the model does not make any positive predictions for these classes. The accuracy of the model is 0.54, which is relatively high due to the majority class being correctly predicted, but it does not reflect the model's actual performance.
 
-### 2) [Tanzanian Water Wells](https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/)
+Therefore, the Dummy Model is not a useful model for classification as it fails to predict any positive instances and performs poorly for classes 1 and 2. Therefore, I proceeded to develop another baseline model which i wanted to build on.
 
-This dataset is part of an active competition until April 7, 2023!
 
-Tanzania, as a developing country, struggles with providing clean water to its population of over 57,000,000. There are many water points already established in the country, but some are in need of repair while others have failed altogether.
+## Decision Tree Classifier
 
-Build a classifier to predict the condition of a water well, using information about the sort of pump, when it was installed, etc. Your audience could be an NGO focused on locating wells needing repair, or the Government of Tanzania looking to find patterns in non-functional wells to influence how new wells are built. Note that this is a **ternary** classification problem by default, but can be engineered to be binary.
+Precision: Precision measures the accuracy of the positive predictions. The precision for label 0 is 0.68, which means that 68% of the samples predicted as label 0 are actually label 0. Precision for label 1 and label 2 are 0.0 and 0.75, respectively.
 
-### 3) [H1N1 and Seasonal Flu Vaccines](https://www.drivendata.org/competitions/66/flu-shot-learning/)
+Recall: Recall measures the ability of the model to correctly identify the positive samples. The recall for label 0 is 0.90, indicating that 90% of the actual label 0 samples were correctly identified. Recall for label 1 is 0.0, indicating that none of the actual label 1 samples were correctly identified. Recall for label 2 is 0.54, indicating that 54% of the actual label 2 samples were correctly identified.
 
-This dataset is part of an active competition until March 31, 2022!
+F1-score: The F1-score is the harmonic mean of precision and recall, providing a balanced measure of the model's performance. The F1-score for label 0 is 0.77, label 1 is 0.0, and label 2 is 0.63. 
 
-As the world struggles to vaccinate the global population against COVID-19, an understanding of how people’s backgrounds, opinions, and health behaviors are related to their personal vaccination patterns can provide guidance for future public health efforts. Your audience could be someone guiding those public health efforts.
+Overall, the DecisionTreeClassifier model has an accuracy of 0.70, meaning that it correctly predicts the labels for 70% of the samples. The model performs well in identifying label 0, with high precision and recall. However, it struggles to identify label 1, as indicated by the low precision and recall for that class. The model shows moderate performance for label 2, with a reasonably high precision and a moderate recall.
 
-This challenge: can you predict whether people got H1N1 and seasonal flu vaccines using data collected in the National 2009 H1N1 Flu Survey? This is a **binary** classification problem, but there are two potential targets: whether the survey respondent received the seasonal flu vaccine, or whether the respondent received the H1N1 flu vaccine. Please choose just one of these potential targets for your minimum viable project.
+This model performed quite well compared to the dummy model and therefore, i proceeded to improve on it. It suffered from class imbalance. I proceeded to use the Logistic Regression Model.
 
-### 4) [Chicago Car Crashes](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if)
 
-Note this links also to [Vehicle Data](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3) and to [Driver/Passenger Data](https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d)
 
-Build a classifier to predict the primary contributory cause of a car accident, given information about the car, the people in the car, the road conditions etc. You might imagine your audience as a Vehicle Safety Board who's interested in reducing traffic accidents, or as the City of Chicago who's interested in becoming aware of any interesting patterns. 
+## Logistic Regression Model
+The accuracy scores for both the training and test sets are similar, with an accuracy of approximately 71.6% for the training set and 71.5% for the test set. This implies there is no overfitting or underfitting it.
 
-This is a **multi-class** classification problem. You will almost certainly want to bin, trim or otherwise limit the number of target categories on which you ultimately predict. Note that some primary contributory causes have very few samples, for example.
+Looking at the confusion matrices, it is evident that the model struggles with predicting class 1 in both the training and test sets. Class 1 is consistently predicted as class 0 or class 2, resulting in a high number of false negatives and low recall for class 1.
 
-### 5) [Terry Traffic Stops](https://data.seattle.gov/Public-Safety/Terry-Stops/28ny-9ts8)
+Overall, the model's performance is relatively low, especially for class 1, which is not predicted correctly at all. I proceeded further to investigate other models.
 
-In [Terry v. Ohio](https://www.oyez.org/cases/1967/67), a landmark Supreme Court case in 1967-8, the court found that a police officer was not in violation of the "unreasonable search and seizure" clause of the Fourth Amendment, even though he stopped and frisked a couple of suspects only because their behavior was suspicious. Thus was born the notion of "reasonable suspicion", according to which an agent of the police may e.g. temporarily detain a person, even in the absence of clearer evidence that would be required for full-blown arrests etc. Terry Stops are stops made of suspicious drivers.
 
-Build a classifier to predict whether an arrest was made after a Terry Stop, given information about the presence of weapons, the time of day of the call, etc. This is a binary classification problem.
+## Light Gradient Boosting Machine (LGBM)
 
-Note that this dataset also includes information about gender and race. You may use this data as well. You could conceivably pitch your project as an inquiry into whether race (of officer or of subject) plays a role in whether or not an arrest is made.
+Recall: The overall recall of the model is 0.784, indicating that it correctly identifies approximately 78.4% of the instances across all classes.
 
-If you do elect to make use of race or gender data, be aware that this can make your project a highly sensitive one; your discretion will be important, as well as your transparency about how you use the data and the ethical issues surrounding it.
+Class 0 (functional): The precision is 0.76, indicating that 76% of the instances predicted as functional are actually functional. The recall is 0.92, indicating that 92% of the functional instances are correctly identified.
 
-## Proposing Your Own Dataset
+Class 1 (functional needs repair): The precision is 0.69, indicating that 69% of the instances predicted as needing repair are actually in need of repair. The recall is 0.18, indicating that only 18% of the instances needing repair are correctly identified. The F1-score is 0.28, which suggests that the model struggles to accurately classify instances in this class. Class 2 (non-functional): The precision is 0.85, indicating that 85% of the instances predicted as non-functional are indeed non-functional. The recall is 0.70, indicating that 70% of the non-functional instances are correctly identified.
 
-Sourcing new data is a valuable skill for data scientists, but it requires a great deal of care. An inappropriate dataset or an unclear business problem can lead you to spend a lot of time on a project that delivers underwhelming results. The guidelines below will help you complete a project that demonstrates your ability to engage in the full data science process.
+The F1-score is 0.77, suggesting a relatively good performance in classifying non-functional instances.
 
-Once you've sourced your own dataset and identified the business problem you want to solve with it, **you must run them by your instructor for approval.**
+Accuracy: The overall accuracy of the model is 0.78, indicating that it correctly predicts approximately 78% of the instances across all classes.
 
-### Data Guidelines
+The LGBM model shows relatively good performance in correctly classifying functional and non-functional instances, but it struggles with accurately identifying instances of class 1.
 
-Your dataset must be:
 
-1. **Appropriate for classification.** It should have a categorical outcome or the data needed to engineer one.   
+## XGBClassifier
 
-2. **Usable to solve a specific business problem.** This solution must rely on your classification model.
+Recall: The average recall across all classes is 0.7806, indicating that the model is able to correctly identify approximately 78.06% of the positive instances in the dataset.
 
-3. **Somewhat complex.** It should contain a minimum of 1000 rows and 10 features.
+Classification Report: The precision, recall, and F1-score are reported for each class (0, 1, 2). Class 0 has a precision of 0.75, indicating that 75% of the predicted instances for class 0 are actually correct. Class 0 also has a recall of 0.93, indicating that 93% of the actual instances of class 0 are correctly predicted by the model.
 
-4. **Unfamiliar.** It can't be one we've already worked with during the course or that is commonly used for demonstration purposes (e.g. Titanic).
+Overall, the XGBClassifier model achieves an accuracy of 78% on the test set, with a higher precision, recall, and F1-score for class 0 compared to classes 1 and 2. The model performs relatively well in identifying instances of class 0 but struggles with the minority classes (1 and 2) due to their imbalanced nature. I will consider strategies to address class imbalance and also explore another model (LGBM) to improve performance on the minority classes.
 
-5. **Manageable.** Stick to datasets that you can model using the techniques introduced in Phase 3.
 
-### Problem First, or Data First?
+## Random Forest
 
-There are two ways that you can source your own dataset: **_Problem First_** or **_Data First_**. The less time you have to complete the project, the more strongly we recommend a Data First approach to this project.
+Model: Random Forest Recall: 0.9014730639730639
 
-**_Problem First_**: Start with a problem that you are interested in that you could potentially solve with a classification model. Then look for data that you could use to solve that problem. This approach is high-risk, high-reward: Very rewarding if you are able to solve a problem you are invested in, but frustrating if you end up sinking lots of time in without finding appropriate data. To mitigate the risk, set a firm limit for the amount of time you will allow yourself to look for data before moving on to the Data First approach.
+Precision: The precision for label 0 is 0.88, indicating that 88% of the samples predicted as label 0 are actually label 0. Precision for label 1 is 0.85, and for label 2 is 0.94. These values indicate a high level of accuracy in predicting the positive samples for each label.
 
-**_Data First_**: Take a look at some of the most popular internet repositories of cool data sets we've listed below. If you find a data set that's particularly interesting for you, then it's totally okay to build your problem around that data set.
+Recall: The recall for label 0 is 0.96, meaning that 96% of the actual label 0 samples were correctly identified. Recall for label 1 is 0.62, indicating that 62% of the actual label 1 samples were correctly identified. Recall for label 2 is 0.87, indicating that 87% of the actual label 2 samples were correctly identified. The model performs well in identifying label 0 and label 2, but has relatively lower performance for label 1 because of class imbalance.
 
-### Potential Data Sources
+F1-score: The F1-score for label 0 is 0.92, label 1 is 0.72, and label 2 is 0.90.
 
-There are plenty of amazing places that you can get your data from. We recommend you start looking at data sets in some of these resources first:
+Overall, the Random Forest model has an accuracy of 0.90, meaning that it correctly predicts the labels for 90% of the samples. The model performs well in identifying label 0 and label 2, with high precision and recall for both classes. However, it shows relatively lower performance for label 1, as indicated by the lower precision and recall for that class.
 
-* [UCI Machine Learning Datasets Repository](https://archive.ics.uci.edu/ml/datasets.php)
-* [Kaggle Datasets](https://www.kaggle.com/datasets)
-* [Awesome Datasets Repo on Github](https://github.com/awesomedata/awesome-public-datasets)
-* Local data portals for state and local government resources
-    - Examples: [NYC](https://opendata.cityofnewyork.us/), [Houston](http://data.houstontx.gov/), [Seattle](https://data.seattle.gov/), [California](https://data.ca.gov/)
-* [Inside AirBNB](http://insideairbnb.com/)
-* [FiveThirtyEight’s data portal](https://data.fivethirtyeight.com/)
-* [Data is Plural’s Archive Spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
-* [Datasets Subreddit](https://www.reddit.com/r/datasets/)
+This model improves significantly from DecisionTreeClassifier.
+
+## Random Forest with SMOTE
+
+Accuracy:The overall accuracy is 0.87, indicating that the model correctly predicts 87% of the instances.
+
+Based on the classification report, the model performs well in predicting class 0 and class 2, with high precision, recall, and F1-scores. However, it performs relatively poorly in predicting class 1, with lower precision, recall, and F1-score values.
+The model accuracy score has actually declined when applying SMOTE hence its better to have the final model without tuning using SMOTE method.
+
+
+## Interpretation, Recommendations & Conclusions
+Based on the results of the Random Forest model, we can draw the following conclusions: I observed that the precision for functional waterpoints (label 0) is 0.88, implying that 88% of the samples predicted as functional are actually functional. The precision for waterpoints that need repair (label 1) is 0.85, indicating 85% accuracy in predicting this category. For non-functional waterpoints (label 2), the precision is 0.94, demonstrating 94% accuracy. These high precision values suggest that the Random Forest model performs well in accurately identifying positive samples for each label.
+
+Moreover, the findings show that the recall for functional waterpoints (label 0) is 0.96, meaning that 96% of the actual functional samples were correctly identified. However, the recall for waterpoints that need repair (label 1) is 0.62, indicating that only 62% of the actual samples needing repair were correctly identified. The recall for non-functional waterpoints (label 2) is 0.87, indicating that 87% of the actual non-functional samples were correctly identified. While the model performs exceptionally well in identifying functional and non-functional waterpoints, it has relatively lower performance in correctly identifying waterpoints that need repair.
+
+I found that the F1-score for functional waterpoints (label 0) is 0.92, for waterpoints needing repair (label 1) is 0.72, and for non-functional waterpoints (label 2) is 0.90. These scores indicate good overall performance, with functional and non-functional waterpoints achieving higher F1-scores compared to waterpoints that need repair.
+
+Overall, the Random Forest model demonstrates significant improvement compared to the Initial Model/Dummy Model, Decision Tree Classifier, Logistic Regression Model, Light Gradient Boosting Machine (LGBM), XGBClassifier and Random Forest with SMOTE
+
+It achieved an accuracy of 0.90, indicating that it correctly predicts the labels for 90% of the samples. The model performs well in accurately identifying functional and non-functional waterpoints, but it struggles to correctly identify waterpoints that need repair, possibly due to class imbalance. To further enhance the model's performance, it is recommended to address the class imbalance issue and explore techniques such as oversampling or undersampling to improve the prediction of waterpoints needing repair.
+
+In conclusion, the Random Forest model shows promise in predicting the condition of waterpoints in Tanzania. By focusing resources on waterpoints that are likely to fail or need repair, implementing more reliable pump types, and ensuring accurate data gathering in collaboration with local governments, we can improve maintenance operations and ensure the availability of clean and potable water to communities across the country.
+Using the given training set and labels set, I developed a predictive model which can be applied to the test set to determine status of the wells.
 
